@@ -1,0 +1,2 @@
+# BilibiliUpBlocker
+关键词屏蔽B站视频的Chrome插件
