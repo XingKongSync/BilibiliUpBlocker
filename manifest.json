@@ -1,0 +1,40 @@
+{
+    "name": "BilibiliUpBlocker",
+    "version": "0.0.3",
+    "manifest_version": 2,
+    "description": "根据关键词屏蔽B站的视频",
+    "permissions": [
+        "tabs",
+        "webRequest",
+        "*://*.bilibili.com/*",
+        "webRequestBlocking"
+    ],
+    "web_accessible_resources": [
+        "deadUp.png"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_title": "BilibiliUpBlocker",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.bilibili.com/",
+				"http://www.bilibili.com/"
+            ],
+            "js": [
+                "jquery.min.js",
+                "jquery-ui.min.js",
+                "jqScrollHelper.js",
+                "blockScript.js"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
