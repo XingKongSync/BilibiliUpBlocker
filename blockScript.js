@@ -37,7 +37,6 @@ function Init() {
             }
         }
     );
-
     getBlackList();
 }
 
@@ -127,3 +126,24 @@ function eyeProtectCheck(place) {
 }
 
 Init();
+
+$(function () {
+    //绑定鼠标悬浮事件
+    $(".bili-wrapper").delegate(".rank-item", "mouseenter", function () {
+        console.log("event triggered.");
+        setTimeout(function () {
+            try {
+                var videoDiv = $(".video-info-module")[0];
+                //获取到视频标题文本
+                var text = $(videoDiv).find(".v-title")[0].innerText;
+                var blackKeyword = checkBlackList(text);
+                if (blackKeyword) {
+                    replaceImageWithDeath(videoDiv);
+                    replaceLinkWithAlert(videoDiv, blackKeyword);
+                }
+            } catch (error) {
+
+            }
+        }, 1000);
+    });
+});
