@@ -4,39 +4,42 @@ BlackList = null;
 function getBlackList() {
     chrome.runtime.sendMessage({}, function (response) {
         BlackList = response;
+        chrome.extension.onMessage.addListener(
+            function (request, sender, sendResponse) {
+                switch (request.code) {
+                    case 0:
+                        //检查右侧排行榜
+                        console.log("检查右侧排行榜");
+                        setTimeout(function () {
+                            eyeProtectCheck(0);
+                        }, 1000);
+                        break;
+                    case 1:
+                        //检查左侧热门视频
+                        console.log("检查左侧热门视频");
+                        setTimeout(function () {
+                            eyeProtectCheck(1);
+                        }, 1000);
+                        break;
+                    case 2:
+                        //检查顶部推荐
+                        console.log("检查顶部推荐");
+                        setTimeout(function () {
+                            eyeProtectCheck(2);
+                        }, 1000);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        );
+        eyeProtectCheck(1);
+        eyeProtectCheck(2);
     });
 }
 
 function Init() {
-    chrome.extension.onMessage.addListener(
-        function (request, sender, sendResponse) {
-            switch (request.code) {
-                case 0:
-                    //检查右侧排行榜
-                    console.log("检查右侧排行榜");
-                    setTimeout(function () {
-                        eyeProtectCheck(0);
-                    }, 1000);
-                    break;
-                case 1:
-                    //检查左侧热门视频
-                    console.log("检查左侧热门视频");
-                    setTimeout(function () {
-                        eyeProtectCheck(1);
-                    }, 1000);
-                    break;
-                case 2:
-                    //检查顶部推荐
-                    console.log("检查顶部推荐");
-                    setTimeout(function () {
-                        eyeProtectCheck(2);
-                    }, 1000);
-                    break;
-                default:
-                    break;
-            }
-        }
-    );
+    
     getBlackList();
 }
 
@@ -71,12 +74,9 @@ function replaceImageWithDeath(videoDiv) {
  * @return {string} 黑名单字符串
  */
 function checkBlackList(text) {
-    if (!BlackList) {
-        getBlackList();
-    }
     for (var i = 0; i < BlackList.length; i++) {
         var t = BlackList[i];
-        if (text.indexOf(t) >= 0) {
+        if (text.toLowerCase().indexOf(t.toLowerCase()) >= 0) {
             return t;
         }
     }
