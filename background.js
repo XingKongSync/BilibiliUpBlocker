@@ -34,7 +34,7 @@ function getBlackList() {
         try {
             BlackList = JSON.parse(localStorage.getItem("BlackList")).blacklist;
         } catch (error) {
-            BlackList = ["聚印象", "PDD", "起小点", "熊猫TV", "糖醋小鸡排", "王者", "主播真会", "吃鸡", "绝地求生", "giao"];
+            BlackList = ["聚印象", "PDD", "起小点", "熊猫TV", "糖醋小鸡排", "王者", "主播真会", "吃鸡", "绝地求生", "giao", "boy"];
         }
 
         return BlackList;

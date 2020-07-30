@@ -53,6 +53,7 @@ function replaceLinkWithAlert(videoDiv, alertMessage) {
     for (var i = 0; i < aTags.length; i++) {
         var a = aTags[i];
         $(a).attr("href", alertScript);
+        $(a).attr("target", "_self");
     }
 }
 
@@ -92,12 +93,12 @@ function eyeProtectCheck(place) {
     var titleClass;
     switch (place) {
         case 0:
-            videoDivClass = ".rank-item"
-            titleClass = ".ri-title";
+            videoDivClass = ".rank-wrap"
+            titleClass = ".f-title";
             break;
         case 1:
-            videoDivClass = ".spread-module";
-            titleClass = ".t";
+            videoDivClass = ".video-card-common";
+            titleClass = ".title";
             break;
         case 2:
             videoDivClass = ".groom-module";
@@ -109,11 +110,12 @@ function eyeProtectCheck(place) {
     var videoDivs = $(videoDivClass);
     for (var i = 0; i < videoDivs.length; i++) {
         var videoDiv = videoDivs[i];
-        var textElements = $(videoDiv).find(titleClass);
-        for (var j = 0; j < textElements.length; j++) {
-            var te = textElements[j];
-            //获取到视频标题文本
-            var text = te.innerText;
+        // var textElements = $(videoDiv).find(titleClass);
+        var text = videoDiv.innerText;
+        // for (var j = 0; j < textElements.length; j++) {
+        //     var te = textElements[j];
+        //     //获取到视频标题文本
+        //     var text = te.innerText;
             var blackKeyword = checkBlackList(text);
             //如果该文本中包含黑名单中的关键词
             if (blackKeyword) {
@@ -121,7 +123,7 @@ function eyeProtectCheck(place) {
                 replaceLinkWithAlert(videoDiv, blackKeyword);
                 break;
             }
-        }
+        // }
     }
 }
 
