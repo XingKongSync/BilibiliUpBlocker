@@ -101,8 +101,8 @@ function eyeProtectCheck(place) {
             titleClass = ".title";
             break;
         case 2:
-            videoDivClass = ".groom-module";
-            titleClass = ".title";
+            videoDivClass = ".video-card-reco";
+            titleClass = ".up";
             break;
         default:
             break;
