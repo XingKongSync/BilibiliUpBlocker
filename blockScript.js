@@ -94,7 +94,7 @@ function eyeProtectCheck(place) {
     switch (place) {
         case 0:
             videoDivClass = ".rank-wrap"
-            titleClass = ".f-title";
+            titleClass = ".subtitle";
             break;
         case 1:
             videoDivClass = ".video-card-common";
@@ -110,20 +110,23 @@ function eyeProtectCheck(place) {
     var videoDivs = $(videoDivClass);
     for (var i = 0; i < videoDivs.length; i++) {
         var videoDiv = videoDivs[i];
-        // var textElements = $(videoDiv).find(titleClass);
+        var textElements = $(videoDiv).find(titleClass);
         var text = videoDiv.innerText;
-        // for (var j = 0; j < textElements.length; j++) {
-        //     var te = textElements[j];
-        //     //获取到视频标题文本
-        //     var text = te.innerText;
-            var blackKeyword = checkBlackList(text);
+        var blackKeyword = checkBlackList(text);
+        // if (!blackKeyword) {
+            for (var j = 0; j < textElements.length && !blackKeyword; j++) {
+                var te = textElements[j];
+                //获取到视频标题文本
+                text = te.innerText;
+                blackKeyword = checkBlackList(text);
+            }
+        // }
             //如果该文本中包含黑名单中的关键词
             if (blackKeyword) {
                 replaceImageWithDeath(videoDiv);
                 replaceLinkWithAlert(videoDiv, blackKeyword);
                 break;
             }
-        // }
     }
 }
 
