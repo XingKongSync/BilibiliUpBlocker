@@ -98,7 +98,7 @@ function eyeProtectCheck(place) {
             break;
         case 1:
             videoDivClass = ".video-card-common";
-            titleClass = ".title";
+            titleClass = ".up";
             break;
         case 2:
             videoDivClass = ".video-card-reco";
@@ -119,13 +119,13 @@ function eyeProtectCheck(place) {
                 //获取到视频标题文本
                 text = te.innerText;
                 blackKeyword = checkBlackList(text);
+                break;
             }
         // }
             //如果该文本中包含黑名单中的关键词
             if (blackKeyword) {
                 replaceImageWithDeath(videoDiv);
                 replaceLinkWithAlert(videoDiv, blackKeyword);
-                break;
             }
     }
 }
